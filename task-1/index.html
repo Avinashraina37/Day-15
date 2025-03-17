@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrabiata Recipe</title>
+</head>
+<body>
+    <h1>Arrabiata Recipe</h1>
+    <div id="meal-info"></div>
+
+    <script>
+
+        fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata')
+
+            .then(response => response.json())
+
+            .then(data =>
+             {
+                const meal = data.meals[0];
+
+                document.getElementById('meal-info').innerHTML = `
+
+                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}" style="width: 400px; ">
+
+                    
+                    <h2>${meal.strMeal}</h2>
+                    <p>${meal.strArea}</p>
+                    <p>${meal.strCategory}</p>
+                    <p>${meal.strInstructions}</p>
+                    
+                   
+
+                `;
+            });
+    </script>
+</body>
+</html>
