@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Categories</title>
+  <style>
+    body
+     {
+         font-family: Arial, sans-serif;
+          text-align: center;
+           padding: 20px;
+         
+        }
+
+    .category
+     {
+         display: inline-block;
+          margin: 20px;
+           padding: 10px;
+            background: #3498db;
+             color: white; 
+             border-radius: 8px; 
+             cursor: pointer; 
+            
+            }
+
+    .category:hover 
+    { 
+        background: #2980b9;
+    
+    }
+  
+  </style>
+
+</head>
+
+<body>
+
+    <h1>Meal Categories</h1>
+
+    <div id="categories"></div>
+
+  <script>
+
+function fetchCategories() {
+
+    fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+
+    .then(res => res.json())
+
+    .then(data => {
+
+        const categories = data.categories;
+
+        const categoriesDiv = document.getElementById('categories');
+
+        categoriesDiv.innerHTML = categories.map(category => `
+
+        <div class="category">
+
+            <h3>${category.strCategory}</h3>
+
+            <img src="${category.strCategoryThumb}" alt="${category.strCategory}" width="100">
+
+            <p>${category.strCategoryDescription.slice(0, 100)}...</p>
+
+            </div>
+
+            `).join('');
+        
+        }
+    )
+    ;
+    
+}
+
+fetchCategories(); 
+
+</script>
+
+</body>
+
+</html>
